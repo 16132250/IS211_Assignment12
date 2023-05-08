@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>List of Students</h2>
+<table border="1">
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Delete?</td>
+    </tr>
+    {% for row in students %}
+    <tr>
+        <td>{{ row['first'] }}</td>
+        <td>{{ row['last'] }}</td>
+        <td><a href="/deletestudent/{{ row['student_id'] }}">Delete</a></td>
+        <td><a href="/studentresults/{{ row['student_id'] }}">Click to view quiz results</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+<a href="/addstudent">Add a Student</a>
+<br><br>
+
+<h2>List of Quizzes</h2>
+<table border="1">
+    <tr>
+        <td>Subject</td>
+        <td>Questions</td>
+        <td>Date</td>
+        <td>View Results</td>
+    </tr>
+    {% for row in quizzes %}
+    <tr>
+        <td>{{ row['subject'] }}</td>
+        <td>{{ row['questions'] }}</td>
+        <td>{{ row['quiz_date'] }}</td>
+        <td><a href="/viewresult/{{ row['quiz_id'] }}">Click to view results</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+
+<h2>Add a Quiz</h2>
+<form action="/addquiz" method="post">
+    <table border="1">
+        <tr>
+            <th>Subject</th>
+            <th>Number of Questions</th>
+            <th>Quiz Date (YYYY-MM-DD)</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="subject" required>
+            </td>
+            <td>
+                <input type="number" name="questions" required>
+            </td>
+            <td>
+                <input type="date" name="quiz_date" required>
+            </td>
+            <td>
+                <input type="submit" value="Add Quiz">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<h2>Add Quiz Result</h2>
+<form action="/addquizresult" method="post">
+    <table border="1">
+        <tr>
+            <th>Student</th>
+            <th>Quiz</th>
+            <th>Score</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <select name="student_id" required>
+                    {% for student in students %}
+                        <option value="{{ student['student_id'] }}">{{ student['first'] }} {{ student['last'] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name="quiz_id" required>
+                    {% for quiz in quizzes %}
+                        <option value="{{ quiz['quiz_id'] }}">{{ quiz['subject'] }} - {{ quiz['quiz_date'] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+                <input type="number" name="score" required>
+            </td>
+            <td>
+                <input type="submit" value="Add Result">
+            </td>
+        </tr>
+    </table>
+</form>
+<br><br>
+
+
+</body>
+</html>

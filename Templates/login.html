@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Who do you want to say hello?</title>
+</head>
+<body>
+<!-- SHow some message if we couldn't login -->
+{% if message %}
+<h2>{{ message }}</h2>
+{% endif %}
+<br><br>
+
+<form action="/login" method="post">
+    User: <input type="text" name="user">
+    Password: <input type="password" name="password">
+    <input type="submit" value="Login">
+</form>
+
+</body>
+</html>

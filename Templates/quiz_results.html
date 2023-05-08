@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>Results for {{ quiz['subject']}}</h2>
+<table border="1">
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Score</td>
+    </tr>
+    {% for row in results %}
+    <tr>
+        <td>{{ row['first'] }}</td>
+        <td>{{ row['last'] }}</td>
+        <td>{{ row['score'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+<br><br>
+<a href="/dashboard">Go to Dashboard</a>
+
+
+</body>
+</html>
